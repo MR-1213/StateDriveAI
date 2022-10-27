@@ -19,7 +19,7 @@ MonoBehaviour:
     width: 1920
     height: 997
   m_ShowMode: 4
-  m_Title: Inspector
+  m_Title: Hierarchy
   m_RootView: {fileID: 6}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
@@ -75,7 +75,7 @@ MonoBehaviour:
   m_MinSize: {x: 300, y: 200}
   m_MaxSize: {x: 24288, y: 16192}
   vertical: 0
-  controlID: 70
+  controlID: 41
 --- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -225,7 +225,7 @@ MonoBehaviour:
   m_MinSize: {x: 100, y: 200}
   m_MaxSize: {x: 8096, y: 16192}
   vertical: 1
-  controlID: 40
+  controlID: 95
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -277,7 +277,7 @@ MonoBehaviour:
     x: 261
     y: 73
     width: 1250
-    height: 486
+    height: 577
   m_ViewDataDictionary: {fileID: 0}
   m_OverlayCanvas:
     m_LastAppliedPresetName: Default
@@ -303,14 +303,14 @@ MonoBehaviour:
       e31: 0
       e32: 0
       e33: 1
-    - e00: 1.3396442
+    - e00: 1.1386976
       e01: 0
       e02: 0
-      e03: 77.06415
+      e03: 162.40448
       e10: 0
-      e11: 1.3396442
+      e11: 1.1386976
       e12: 0
-      e13: 107.40379
+      e13: 135.09322
       e20: 0
       e21: 0
       e22: 1
@@ -323,8 +323,6 @@ MonoBehaviour:
   m_AnimatorController: {fileID: 9100000, guid: 5bbe411ba4006b540b459cb5232117ee, type: 2}
   m_BreadCrumbs:
   - m_Target: {fileID: -5809849029505004672, guid: 5bbe411ba4006b540b459cb5232117ee, type: 2}
-    m_ScrollPosition: {x: 0, y: 0}
-  - m_Target: {fileID: -5764417397413250613, guid: 5bbe411ba4006b540b459cb5232117ee, type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
   stateMachineGraphGUI: {fileID: 0}
@@ -406,22 +404,22 @@ MonoBehaviour:
     m_SkipHidden: 0
     m_SearchArea: 1
     m_Folders:
-    - Assets/Objects/Player
+    - Assets/Scripts
     m_Globs: []
     m_OriginalText: 
   m_ViewMode: 1
   m_StartGridSize: 64
   m_LastFolders:
-  - Assets/Objects/Player
+  - Assets/Scripts
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\RSM38\StateDriveAI
+  m_LastProjectPath: "C:\\Users\\RSM38\\Downloads\\Unity\u958B\u767A\u30D5\u30A9\u30EB\u30C0\\StateDriveAI"
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: dc730000
-    m_LastClickedID: 29660
-    m_ExpandedIDs: 0000000016720000c073000000ca9a3b
+    m_SelectedIDs: d8730000
+    m_LastClickedID: 29656
+    m_ExpandedIDs: 000000003672000000ca9a3b
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -449,7 +447,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 
     m_LastClickedID: 0
-    m_ExpandedIDs: 0000000016720000
+    m_ExpandedIDs: 0000000036720000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -476,7 +474,7 @@ MonoBehaviour:
   m_ListAreaState:
     m_SelectedInstanceIDs: 
     m_LastClickedInstanceID: 0
-    m_HadKeyboardFocusLastEvent: 1
+    m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: c6230000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
@@ -577,9 +575,9 @@ MonoBehaviour:
   m_SceneHierarchy:
     m_TreeViewState:
       scrollPos: {x: 0, y: 0}
-      m_SelectedIDs: 54eaffff
-      m_LastClickedID: -5548
-      m_ExpandedIDs: 0cfbffff0efbffffee7000004c710000
+      m_SelectedIDs: 6c700000
+      m_LastClickedID: 28780
+      m_ExpandedIDs: 0efbffff
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: 
@@ -844,7 +842,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
-      displayed: 0
+      displayed: 1
       snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
@@ -861,9 +859,9 @@ MonoBehaviour:
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
-    m_Target: {x: 2.2335835, y: -1.0162945, z: 0.40697026}
+    m_Target: {x: 0, y: 1, z: 0}
     speed: 2
-    m_Value: {x: 2.2335835, y: -1.0162945, z: 0.40697026}
+    m_Value: {x: 0.000093644725, y: 1.0000763, z: 0.00006984423}
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -910,13 +908,13 @@ MonoBehaviour:
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
-    m_Target: {x: 0.18492135, y: 0.69131786, z: -0.19021183, w: 0.67208964}
+    m_Target: {x: 0.03749064, y: 0.0059957276, z: -0.00022496608, w: 0.9992796}
     speed: 2
-    m_Value: {x: 0.18463573, y: 0.6923248, z: -0.19048889, w: 0.6710515}
+    m_Value: {x: -0.03749064, y: -0.0059957276, z: 0.00022496608, w: -0.9992796}
   m_Size:
-    m_Target: 2.8294551
+    m_Target: 2.027046
     speed: 2
-    m_Value: 2.7076125
+    m_Value: 2.1225612
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1002,7 +1000,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 0
+    m_EnableMouseInput: 1
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -1026,7 +1024,7 @@ MonoBehaviour:
       width: 2428.0576
       height: 1080
     m_MinimalGUI: 1
-  m_defaultScale: 0.5148148
+  m_defaultScale: 0.53425926
   m_LastWindowPixelSize: {x: 1250, y: 577}
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
