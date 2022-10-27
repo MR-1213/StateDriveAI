@@ -31,6 +31,11 @@ public class PlayerController : MonoBehaviour
     bool stateEnter = false;
     float stateTime = 0;
 
+    enum Anim_State{
+        Stand = 0,
+        Eating = 1,
+    }
+
     enum Desire{
         Toilet,
         Eat,
@@ -43,6 +48,11 @@ public class PlayerController : MonoBehaviour
         stateEnter = true;
         stateTime = 0;
         Debug.Log(currentState.ToString());
+    }
+
+    private void ChangeAnimState(Anim_State state)
+    {
+        animator.SetInteger("ID", (int)state);
     }
 
     Dictionary<Desire, float> desireDictionary = new Dictionary<Desire, float>();
@@ -123,6 +133,8 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+                ChangeAnimState(Anim_State.Stand);
+
                 if(navmeshAgent.remainingDistance <= 0.01f && !navmeshAgent.pathPending)
                 {
                     ChangeState(targetState);
@@ -147,11 +159,15 @@ public class PlayerController : MonoBehaviour
 
                 if(stateEnter)
                 {
-
+                    navmeshAgent.enabled = false;
+                    ChangeAnimState(Anim_State.Eating);
+                    transform.position = point_Table.position;
+                    transform.rotation = point_Table.rotation;
                 }
 
                 if(stateTime >= 3.0f)
                 {
+                    navmeshAgent.enabled = true;
                     desireDictionary[Desire.Eat] = 0;
                     ChangeState(State.MoveToDestination);
                     return;
