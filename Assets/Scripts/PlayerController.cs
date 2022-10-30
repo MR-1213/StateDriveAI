@@ -34,6 +34,7 @@ public class PlayerController : MonoBehaviour
     enum Anim_State{
         Stand = 0,
         Eating = 1,
+        Toilet = 2,
     }
 
     enum Desire{
@@ -197,12 +198,16 @@ public class PlayerController : MonoBehaviour
 
                 if(stateEnter)
                 {
-
+                    navmeshAgent.enabled = false;
+                    ChangeAnimState(Anim_State.Toilet);
+                    transform.position = point_Toilet.position;
+                    transform.rotation = point_Toilet.rotation;
                 }
 
                 if(stateTime >= 4.0f)
                 {
-                    desireDictionary[Desire.Eat] = 0;
+                    navmeshAgent.enabled = true;
+                    desireDictionary[Desire.Toilet] = 0;
                     ChangeState(State.MoveToDestination);
                     return;
                 }
