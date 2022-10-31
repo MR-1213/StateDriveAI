@@ -35,6 +35,7 @@ public class PlayerController : MonoBehaviour
         Stand = 0,
         Eating = 1,
         Toilet = 2,
+        Sleep = 3,
     }
 
     enum Desire{
@@ -115,14 +116,17 @@ public class PlayerController : MonoBehaviour
                         {
                             case Desire.Eat:
                                 navmeshAgent.SetDestination(point_Table.position);
+                                navmeshAgent.speed = 2.0f;
                                 targetState = State.Eating;
                                 break;
                             case Desire.Sleep:
                                 navmeshAgent.SetDestination(point_Bed.position);
+                                navmeshAgent.speed = 1.7f;
                                 targetState = State.Sleeping;
                                 break;
                             case Desire.Toilet:
                                 navmeshAgent.SetDestination(point_Toilet.position);
+                                navmeshAgent.speed = 3.0f;
                                 targetState = State.SitOnToilet;
                                 break;
                         }
@@ -130,6 +134,7 @@ public class PlayerController : MonoBehaviour
                     else
                     {
                         navmeshAgent.SetDestination(point_Living.position);
+                        navmeshAgent.speed = 1.7f;
                         targetState = State.DoNothing;
                     }
                 }
@@ -181,11 +186,15 @@ public class PlayerController : MonoBehaviour
 
                 if(stateEnter)
                 {
-
+                    navmeshAgent.enabled = false;
+                    ChangeAnimState(Anim_State.Sleep);
+                    transform.position = point_Bed.position;
+                    transform.rotation = point_Bed.rotation;
                 }
 
                 if(stateTime >= 5.0f)
                 {
+                    navmeshAgent.enabled = true;
                     desireDictionary[Desire.Sleep] = 0;
                     ChangeState(State.MoveToDestination);
                     return;
