@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     NavMeshAgent navmeshAgent;
     Animator animator;
 
-    enum State
+    enum State //取りうる全ての行動
     {
         MoveToDestination,
         Eating,
@@ -26,25 +26,25 @@ public class PlayerController : MonoBehaviour
         DoNothing,
     }
 
-    State currentState = State.MoveToDestination;
+    State currentState = State.MoveToDestination; //初めの行動は目的地に移動するステート
     State targetState = State.DoNothing;
-    bool stateEnter = false;
-    float stateTime = 0;
+    bool stateEnter = false; //新たなステートに入った時に最初の1フレームだけtrueになる
+    float stateTime = 0;//ステート実行中の経過時間
 
-    enum Anim_State{
+    enum Anim_State{ //アニメーションを遷移させるためのステート
         Stand = 0,
         Eating = 1,
         Toilet = 2,
         Sleep = 3,
     }
 
-    enum Desire{
+    enum Desire{ //欲求を管理するステート(1.0になると対応する行動を実行)
         Toilet,
         Eat,
         Sleep,
     }
 
-    private void ChangeState(State newState)
+    private void ChangeState(State newState) //新たなステートに遷移
     {
         currentState = newState;
         stateEnter = true;
@@ -52,12 +52,13 @@ public class PlayerController : MonoBehaviour
         Debug.Log(currentState.ToString());
     }
 
-    private void ChangeAnimState(Anim_State state)
+    private void ChangeAnimState(Anim_State state) //新たなアニメーションに遷移
     {
         animator.SetInteger("ID", (int)state);
     }
 
-    Dictionary<Desire, float> desireDictionary = new Dictionary<Desire, float>();
+    /* DesireステートをKey,float型の値をValueとしたディクショナリーを作成 */
+    Dictionary<Desire, float> desireDictionary = new Dictionary<Desire, float>(); //この時点ではまだ空のディクショナリー
 
     private void Start()
     {
@@ -65,12 +66,13 @@ public class PlayerController : MonoBehaviour
         animator = GetComponent<Animator>();
         Cursor.lockState = CursorLockMode.Locked;
 
+        /* in以降でDesireステートの逐次取得。ディクショナリーのValue(float)を変数disireに入れる */
         foreach(Desire desire in Enum.GetValues(typeof(Desire)))
         {
-            desireDictionary.Add(desire, 0f);
+            desireDictionary.Add(desire, 0f); //各々の欲求に初期値として0を代入 & ディクショナリーに追加
         }
 
-        ChangeState(State.MoveToDestination);
+        ChangeState(State.MoveToDestination); //一度だけ実行しておく
     }
 
     private void Update()
@@ -82,20 +84,20 @@ public class PlayerController : MonoBehaviour
 
         if(currentState != State.Eating)
         {
-            desireDictionary[Desire.Eat] += Time.deltaTime / 5.0f; //5秒に一回欲求がMaxに
+            desireDictionary[Desire.Eat] += Time.deltaTime / 30.0f; //30秒に一回欲求がMaxに
         }
 
         if(currentState != State.Sleeping)
         {
-            desireDictionary[Desire.Sleep] += Time.deltaTime / 10.0f;
+            desireDictionary[Desire.Sleep] += Time.deltaTime / 60.0f;
         }
         
         if(currentState != State.SitOnToilet)
         {
-             desireDictionary[Desire.Toilet] += Time.deltaTime / 7.0f;
+             desireDictionary[Desire.Toilet] += Time.deltaTime / 40.0f;
         }
 
-        IOrderedEnumerable<KeyValuePair<Desire, float>> sortedDesire = desireDictionary.OrderByDescending(i => i.Value);
+        IOrderedEnumerable<KeyValuePair<Desire, float>> sortedDesire = desireDictionary.OrderByDescending(i => i.Value); //最も欲求値の高いものが先頭に来るようにソート
 
         text.text ="";
         foreach(KeyValuePair<Desire, float> sortedDesireElement in sortedDesire)
@@ -105,10 +107,10 @@ public class PlayerController : MonoBehaviour
 
         switch (currentState)
         {
-            case State.MoveToDestination: {
-                if(stateEnter)
+            case State.MoveToDestination: { //目的地に向かうステート
+                if(stateEnter) //1フレーム目で目的地、スピード、次の行動を決定
                 {
-                    var topDesireElement = sortedDesire.ElementAt(0);
+                    var topDesireElement = sortedDesire.ElementAt(0); //最も欲求の大きいものを取得
 
                     if(topDesireElement.Value >= 1.0f)
                     {
@@ -139,11 +141,12 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+                /* ここは毎フレーム実行する */
                 ChangeAnimState(Anim_State.Stand);
 
-                if(navmeshAgent.remainingDistance <= 0.01f && !navmeshAgent.pathPending)
+                if(navmeshAgent.remainingDistance <= 0.01f && !navmeshAgent.pathPending) //目的地に到着したら
                 {
-                    ChangeState(targetState);
+                    ChangeState(targetState); //targetStateの行動を次の行動とする
                     return;
                 }
 
@@ -152,7 +155,7 @@ public class PlayerController : MonoBehaviour
 
             case State.DoNothing: {
                 
-                if(sortedDesire.ElementAt(0).Value >= 1.0f)
+                if(sortedDesire.ElementAt(0).Value >= 1.0f) //いずれかの欲求値が1.0になるまで何もせず待機(Stopアニメーション実行)
                 {
                     ChangeState(State.MoveToDestination);
                     return;
@@ -230,7 +233,7 @@ public class PlayerController : MonoBehaviour
     {
         if(stateTime != 0)
         {
-            stateEnter = false;
+            stateEnter = false; //最初の1フレーム後はfalseに
         }
         
         
